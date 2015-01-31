@@ -15,10 +15,13 @@ namespace BAMBOOK
 
         static void Main(string[] args)
             {
-            Bamboo.Sharp.Api.BambooApi bamboo = new Bamboo.Sharp.Api.BambooApi("Bamboo.acumatica.com", "buildilka", "Aw34esz");
+            Bamboo.Sharp.Api.BambooApi bamboo = new Bamboo.Sharp.Api.BambooApi("http://bamboo.acumatica.com", "buildilka", "password");
             var PRservice = bamboo.GetService<Bamboo.Sharp.Api.Services.ProjectService>();
             var plans = PRservice.GetProjects().All.Single(p=>p.Name.Equals("acumatica")).Plans.All;
-            foreach (var plan in plans) Console.WriteLine(plan.GetLastSuccessfullBuildNumber());
+
+            foreach (var plan in plans) Console.WriteLine(plan.Name +" : "+ plan.GetLastSuccessfullBuildNumber());
+
+            Console.ReadLine();
             }
         }
     }
